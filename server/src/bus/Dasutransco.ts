@@ -58,7 +58,7 @@ export class Dasutransco {
 
       const regUser: user = {
          name: msg.name, 
-         time: msg.time ? msg.time : Date.now(),
+         time: msg.time,
          lat: lat,
          lon: lon
       }

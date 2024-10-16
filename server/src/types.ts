@@ -8,5 +8,5 @@ export type UserBus = {
    name: string,
    route: string,
    coord: string,
-   time?: number, // Date.now()
+   time: number, // Date.now()
 }

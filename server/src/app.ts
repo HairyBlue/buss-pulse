@@ -43,6 +43,7 @@ wss.on("connection", (ws: WebSocket) => {
       const myBuss = userBus.getBusType(msg.name);
 
       if (myBuss) {
+         msg.time = Date.now();
          myBuss.register(msg);
       }
 

@@ -10,7 +10,7 @@ export class BusInstance {
    singleton = false;
    buses: { [key: string]: any } = {};
 
-   async setInstance() {
+   setInstance() {
       if (!this.singleton) {
 
          const instances: literals = {

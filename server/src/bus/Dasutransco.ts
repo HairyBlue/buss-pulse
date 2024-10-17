@@ -69,10 +69,6 @@ export class Dasutransco {
       this.groupUserInMeters(regUser, msg)
    }
 
-   schedCleanUp() {
-
-   }
-
    cleanUpAge() {
       const userThreshold  = 3 * 60 * 1000;
       const routeThreshold  = 5 * 30 * 1000;
@@ -202,14 +198,13 @@ export class Dasutransco {
             
             
             if (nearUsers.length >= minTrack) {
-               nearUsers.push(msg.uuid);
                const bId = busId(mybuss);
 
                if (!this.groups[msg.route][bId]) {
                   this.groups[msg.route][bId] = {}
                }
 
-               for (let nearUser of nearUsers) {
+               for (let nearUser of [msg.uuid, ...nearUsers]) {
                   this.groups[msg.route][bId][nearUser] = userRoute[nearUser];
                }
    
@@ -217,8 +212,5 @@ export class Dasutransco {
          }
       }
 
-
-      
    }
-   
 }

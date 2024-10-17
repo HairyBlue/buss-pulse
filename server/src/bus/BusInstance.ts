@@ -5,10 +5,15 @@ import * as logger from "../logger";
 const logging = logger.wichFileToLog("BusInstance");
 
 export class BusInstance {
-   dasutransco = new Dasutransco();
-
+   config: any = null
    singleton = false;
    buses: { [key: string]: any } = {};
+
+   dasutransco = new Dasutransco();
+
+   constructor(config: any) {
+      this.config = config
+   }
 
    setInstance() {
       if (!this.singleton) {
@@ -18,9 +23,11 @@ export class BusInstance {
          }
 
          for ( let [key, ctx] of Object.entries(instances)) {
-            try { this.buses[key] = ctx } 
-            catch (error) 
-            {
+            try { 
+               ctx.setConfig(this.config);
+               this.buses[key] = ctx 
+            } 
+            catch (error) {
                logging
                .error( 
                   "Failed to set Bus Instance", 
@@ -41,11 +48,15 @@ export class BusInstance {
       return userBus; 
    }
 
-   cleanUpInterval() {
-      setInterval(()=>{
-         for (let bus in this.buses) {
-            this.buses[bus].cleanUpAge();
-         }
-      }, 3000)
+   cleanUpAge() {
+      for (let bus in this.buses) {
+         this.buses[bus].cleanUpAge();
+      }
+   }
+
+   forceCleanUp() {
+      for (let bus in this.buses) {
+         this.buses[bus].forceCleanUp();
+      }
    }
 }

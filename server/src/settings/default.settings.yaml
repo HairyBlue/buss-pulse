@@ -1,0 +1,28 @@
+settings:
+  allowedCountry: "PH"
+  centerCoord: "6.748549484179313, 125.35575308932928" # Business Center digos city
+  allowedDistance: 50.0 # 50 KM to Business Center digos city
+
+  # road obstraction probably the cause for long delay
+  timeout: 3600000  # 1 * 60 * 60 * 1000 // user timeout 1hour
+  removeLaterAt: 300000 # 5 * 60 * 1000 // remove user at 5 min if no near user
+
+  cleanUp:
+    interval: 180000 # 3 * 60 * 1000
+    userThreshold: 600000 # 10 * 60 * 1000  // clean up user connected that save in route and grou
+    routeThreshold: 1800000 # 20 * 60 * 1000 // clean up routes of busess for 30min
+
+  distance:
+    meters:
+      threshold: 10.0
+      minNearUser: 1
+
+  schedule:
+    closedConnection:
+      cron: "*/2 * * * *" # "0 22 * * *" 10PM
+      timezone: "Asia/Manila"
+      enable: true
+    openConnection:
+      cron: "*/3 * * * *" # "0 5 * * *" 5AM
+      timezone: "Asia/Manila"
+      enable: true

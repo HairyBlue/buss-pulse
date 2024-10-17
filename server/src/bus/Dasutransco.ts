@@ -14,7 +14,8 @@ export const standardizeRoute: { [key: string]: string} = {
 
 type user = {
       name: string,
-      time: number
+      time: number,
+      removeLaterAt: number 
    } & coord
 
 type userReg = { [key: string]: user }
@@ -25,9 +26,15 @@ type busReg = { [key: string]: userReg }
 type group = { [key: string]: busReg }
 
 export class Dasutransco {
-   routes: route = {}
-   groups: group = {}
+   config: any = null;
+
+   routes: route = {};
+   groups: group = {};
    ageRoute: {[key: string]: number} = {}
+
+   setConfig(config: any) {
+      this.config = config
+   }
 
    register(msg: UserBus) {
       if (!msg) return
@@ -59,6 +66,7 @@ export class Dasutransco {
       const regUser: user = {
          name: msg.name, 
          time: msg.time,
+         removeLaterAt: msg.removeLaterAt,
          lat: lat,
          lon: lon
       }
@@ -69,9 +77,17 @@ export class Dasutransco {
       this.groupUserInMeters(regUser, msg)
    }
 
+   forceCleanUp() {
+      this.routes = {};
+      this.groups = {};
+      this.ageRoute = {};
+
+      logging.info("Force clean up done");
+   }
+
    cleanUpAge() {
-      const userThreshold  = 3 * 60 * 1000;
-      const routeThreshold  = 5 * 30 * 1000;
+      const userThreshold  = this.config.cleanUp.userThreshold; //3 * 60 * 1000;
+      const routeThreshold  = this.config.cleanUp.routeThreshold; //5 * 30 * 1000;
       const currentTime = Date.now();
 
       for (let ageroute in this.ageRoute) {
@@ -106,8 +122,8 @@ export class Dasutransco {
 
 
    groupUserInMeters(regUser: user, msg: UserBus) {
-      const threshold = 8.0;
-      const minTrack = 1;
+      const threshold = this.config.distance.meters.threshold; //8.0;
+      const minTrack = this.config.distance.meters.minNearUser; //1;
 
       let alreadyInGroup: boolean = false;
 
@@ -152,8 +168,16 @@ export class Dasutransco {
                }
 
                if (nearUsersCount == 0) {
-                  delete this.groups[groute][busId][msg.uuid];
-                  alreadyInGroup = false;
+                  const hasToRemove = this.groups[groute][busId][msg.uuid].removeLaterAt;
+
+                  if (isNaN(hasToRemove)) {
+                     this.groups[groute][busId][msg.uuid].removeLaterAt = Date.now();
+                  } 
+
+                  else if (Date.now() - hasToRemove > this.config.removeLaterAt) {
+                     delete this.groups[groute][busId][msg.uuid];
+                     alreadyInGroup = false;
+                  }
                }
 
                alreadyInGroup = true;

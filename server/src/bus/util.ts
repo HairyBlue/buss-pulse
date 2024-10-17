@@ -28,6 +28,36 @@ function getDistanceKm(coord1: coord1, coord2: coord2): number {
    return getDistanceMeters(coord1, coord2) / 1000;
 }
 
+function getDistanceFromBCenter(userCoord: string, center: string): number {
+   const userC = /([-]?\d+\.\d+), *([-]?\d+\.\d+)/.exec(userCoord);
+   const bc = /([-]?\d+\.\d+), *([-]?\d+\.\d+)/.exec(center);
+
+   if (!userC && !bc) {
+      return NaN;
+   }
+   if (userC && bc) {
+      const userLat = parseFloat(userC[1]);
+      const userLon = parseFloat(userC[2]);
+
+      const coord1: coord1 = {
+         lat1: userLat,
+         lon1: userLon
+      }
+      
+      const bcLat = parseFloat(bc[1]);
+      const bcLon = parseFloat(bc[2]);
+
+      const coord2: coord2 = {
+         lat2: bcLat,
+         lon2: bcLon
+      }
+
+
+      return getDistanceKm(coord1, coord2);
+   }
+
+   return NaN;
+}
 
 function busId(bus: string): string {
    const id = 'xyxyxyxy'.replace(/[xy]/g, function(c) {
@@ -40,6 +70,7 @@ function busId(bus: string): string {
 
   
 export {
+   getDistanceFromBCenter,
    getDistanceKm,
    getDistanceMeters,
    busId

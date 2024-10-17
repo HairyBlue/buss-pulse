@@ -10,5 +10,5 @@ export type UserBus = {
    route: string,
    coord: string,
    time: number, // Date.now()
-   removeLaterAt: number // Date.now() + 10 * 60 * 1000
+   removeLaterAt: null | number // Date.now() + 10 * 60 * 1000
 }

@@ -10,7 +10,7 @@ const standardizeRoute: {[key: string]:string} = {
    "Digos City - Tacul Magsaysay via Hagonoy & Matanao": "digos_hagonoy_matano_tacul"
 }
 
-const sampleData: UserBus[] = [
+let sampleData: UserBus[] = [
    {
       country: "PH",
       uuid: "f6962f40-1edf-4691-8d03-2cbe494058f3",
@@ -123,3 +123,17 @@ setInterval(()=>{
 }, 3000)
 
 startSocket();
+
+setTimeout(()=>{
+   let newsam = []
+   for(let sam of sampleData) {
+      if (sam.uuid == "9dccb786-684c-44f8-bbdf-9a8531878db8") {
+         
+         sam.coord = "6.7909625639078, 125.3109845996967";
+         console.log(sam)
+      }
+      newsam.push(sam)
+   }
+   sampleData = newsam;
+
+}, 12000)

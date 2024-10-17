@@ -19,10 +19,10 @@ settings:
 
   schedule:
     closedConnection:
-      cron: "*/2 * * * *" # "0 22 * * *" 10PM
+      cron: "0 22 * * *" # "0 22 * * *" 10PM
       timezone: "Asia/Manila"
       enable: true
     openConnection:
-      cron: "*/3 * * * *" # "0 5 * * *" 5AM
+      cron: "0 5 * * *" # "0 5 * * *" 5AM
       timezone: "Asia/Manila"
       enable: true

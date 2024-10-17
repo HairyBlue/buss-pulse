@@ -101,7 +101,7 @@ function startWebSocket() {
    
          if (myBuss) {
             const distance = getDistanceFromBCenter(msg.coord, defaultConfig.centerCoord);
-           console.log(distance)
+            
             if (
                msg.country == defaultConfig.allowedCountry &&
                distance < defaultConfig.allowedDistance

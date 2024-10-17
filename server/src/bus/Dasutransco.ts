@@ -15,7 +15,7 @@ export const standardizeRoute: { [key: string]: string} = {
 type user = {
       name: string,
       time: number,
-      removeLaterAt: number 
+      removeLaterAt: number | null
    } & coord
 
 type userReg = { [key: string]: user }
@@ -66,7 +66,7 @@ export class Dasutransco {
       const regUser: user = {
          name: msg.name, 
          time: msg.time,
-         removeLaterAt: msg.removeLaterAt,
+         removeLaterAt: msg.removeLaterAt as any,
          lat: lat,
          lon: lon
       }
@@ -138,8 +138,16 @@ export class Dasutransco {
             let nearUsersCount = 0;
 
             if (this.groups[groute][busId][msg.uuid]) {
-               this.groups[groute][busId][msg.uuid] = regUser;
+               const newReg = Object.assign({}, regUser);
+
+               const meRemoveLater = this.groups[groute][busId][msg.uuid].removeLaterAt;
                
+               if (typeof(meRemoveLater) == "number") {
+                  newReg.removeLaterAt = meRemoveLater;
+               } 
+               
+               this.groups[groute][busId][msg.uuid] = newReg;
+
                for (let users in this.groups[groute][busId]) {
                   if (users == msg.uuid) {
                      continue
@@ -166,11 +174,11 @@ export class Dasutransco {
                      
                   }
                }
-
+              
                if (nearUsersCount == 0) {
                   const hasToRemove = this.groups[groute][busId][msg.uuid].removeLaterAt;
-
-                  if (isNaN(hasToRemove)) {
+                 
+                  if (hasToRemove == null || isNaN(hasToRemove)) {
                      this.groups[groute][busId][msg.uuid].removeLaterAt = Date.now();
                   } 
 
@@ -178,6 +186,8 @@ export class Dasutransco {
                      delete this.groups[groute][busId][msg.uuid];
                      alreadyInGroup = false;
                   }
+               } else {
+                  this.groups[groute][busId][msg.uuid].removeLaterAt = null;
                }
 
                alreadyInGroup = true;

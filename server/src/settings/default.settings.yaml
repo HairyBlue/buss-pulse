@@ -8,9 +8,9 @@ settings:
   removeLaterAt: 300000 # 5 * 60 * 1000 // remove user at 5 min if no near user
 
   cleanUp:
-    interval: 180000 # 3 * 60 * 1000
-    userThreshold: 600000 # 10 * 60 * 1000  // clean up user connected that save in route and grou
-    routeThreshold: 1800000 # 20 * 60 * 1000 // clean up routes of busess for 30min
+    interval: 500 #180000 # 3 * 60 * 1000
+    userThreshold: 900000 # 15 * 60 * 1000  // clean up staled user connected that save in route and group
+    routeThreshold: 1800000 # 30 * 60 * 1000 // clean up staled routes of busess for 30min
 
   distance:
     meters:

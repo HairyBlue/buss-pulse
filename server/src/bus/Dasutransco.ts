@@ -118,6 +118,17 @@ export class Dasutransco {
             }
          }
       }
+
+      for (let groute in this.groups) {
+         for (let bid in this.groups[groute]) {
+            // check if possible bus has user. else remove
+            const uuids = Object.keys(this.groups[groute][bid]);
+
+            if (uuids.length <= 0) {
+               delete this.groups[groute][bid];
+            }
+         }
+      }
    }
 
 

@@ -81,7 +81,7 @@ function cleanUpAges() {
       cleanUpIntervalAges = setInterval(() => {
          terminateClientTimeOut();
          userBus.cleanUpAge();
-      }, 180000)
+      }, defaultConfig.cleanUp.interval)
    }
 }
 
@@ -101,7 +101,7 @@ function startWebSocket() {
    
          if (myBuss) {
             const distance = getDistanceFromBCenter(msg.coord, defaultConfig.centerCoord);
-            
+
             if (
                msg.country == defaultConfig.allowedCountry &&
                distance < defaultConfig.allowedDistance

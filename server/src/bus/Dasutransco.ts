@@ -36,6 +36,11 @@ export class Dasutransco {
       this.config = config
    }
 
+   standardizeRoute(sroute: string): boolean {
+      if (standardizeRoute[sroute]) return true
+      return false
+   }
+
    register(msg: UserBus) {
       if (!msg) return
 
@@ -257,5 +262,9 @@ export class Dasutransco {
          }
       }
 
+   }
+
+   getBusesBaseRoute(route: string) {
+      return this.routes[route] ? this.routes[route] : {};
    }
 }

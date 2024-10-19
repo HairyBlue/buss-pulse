@@ -2,7 +2,7 @@
 import * as types from "./types"
 
 // lib
-import Fastify, { FastifyReply, FastifyRequest } from "fastify";
+import Fastify, { DoneFuncWithErrOrRes, FastifyInstance, FastifyReply, FastifyRequest, RouteOptions } from "fastify";
 import { WebSocket, WebSocketServer } from "ws";
 import * as cron from "node-cron";
 
@@ -12,7 +12,7 @@ import { BusInstance } from "./bus/BusInstance";
 import { getDistanceFromBCenter } from "./bus/util"; 
 import * as logger from "./logger";
 
-
+import * as user from "./routes/users"
 interface ExtendWebSocket extends WebSocket {
    lastActive?: number
 }
@@ -39,18 +39,7 @@ let cleanUpIntervalAges: any = null;
 
 // BOUNDARY ###########################################################################################
 
-fastify.get("/", function(request: FastifyRequest, reply: FastifyReply) {
-   const myBuss = userBus.getBusType("DASUTRANSCO");
-
-   reply.code(200).send(
-      {
-         message: { 
-            routes: myBuss.routes, 
-            groups: myBuss.groups
-         }
-      }
-   )
-})
+fastify.register((fastify, opt, done)=>{ user.buildRoutes(fastify, opt, done)}, { prefix: "/api", userBus: userBus})
 
 function terminateAllClientConnection() {
    let connectedUser = 0;

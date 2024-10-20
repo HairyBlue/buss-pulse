@@ -1,9 +1,14 @@
-import { supported, literals } from "./types"; 
+import { supported, supportedBuses } from "./types"; 
 import { Dasutransco } from "./Dasutransco";
 import * as logger from "../logger";
 
 const logging = logger.wichFileToLog("BusInstance");
 
+/**
+ * setInstance for subclasses currently for Dasutransco
+ * Singleton to only set once and having a persistent data for registering user shared location
+ * subclass are registered in buses object
+ */
 export class BusInstance {
    config: any = null
    singleton = false;
@@ -18,14 +23,18 @@ export class BusInstance {
    setInstance() {
       if (!this.singleton) {
 
-         const instances: literals = {
-            DASUTRANSCO: this.dasutransco
+         const instances: supportedBuses = {
+            DASUTRANSCO: this.dasutransco,
+            MINITRANSCO: null,
+            DIPATRANSCO: null
          }
 
          for ( let [key, ctx] of Object.entries(instances)) {
             try { 
-               ctx.setConfig(this.config);
-               this.buses[key] = ctx 
+               if (ctx) {
+                  ctx.setConfig(this.config);
+                  this.buses[key] = ctx 
+               }
             } 
             catch (error) {
                logging

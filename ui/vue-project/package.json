@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
-    "preview": "vite preview",
+    "preview": "vite preview --port 4433 --host=0.0.0.0",
     "test:unit": "vitest",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
@@ -32,6 +32,7 @@
     "npm-run-all2": "^6.2.3",
     "typescript": "~5.5.4",
     "vite": "^5.4.8",
+    "vite-plugin-pwa": "^0.20.5",
     "vitest": "^2.1.2",
     "vue-tsc": "^2.1.6"
   }

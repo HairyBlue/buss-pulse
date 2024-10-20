@@ -2,7 +2,7 @@
 import * as types from "./types"
 
 // lib
-import Fastify, { DoneFuncWithErrOrRes, FastifyInstance, FastifyReply, FastifyRequest, RouteOptions } from "fastify";
+import Fastify, { FastifyInstance } from "fastify";
 import { WebSocket, WebSocketServer } from "ws";
 import * as cron from "node-cron";
 
@@ -12,14 +12,20 @@ import { BusInstance } from "./bus/BusInstance";
 import { getDistanceFromBCenter } from "./bus/util"; 
 import * as logger from "./logger";
 
-import * as user from "./routes/users"
+import * as user from "./routes/users";
 interface ExtendWebSocket extends WebSocket {
    lastActive?: number
 }
 
 const logging = logger.wichFileToLog("app");
-const defaultConfig = configs.default.settings;
 
+/**
+ * This config can be found on settings/*.yaml
+ * It provide a global setting were many functions are using the same
+ * This also easy to modify if the any adjustment
+ * you can edit which suite your need
+ */
+const defaultConfig = configs.default.settings;
 if (!defaultConfig) {
    logging.error("No defualt config", defaultConfig,  " => ", configs);
    process.exit(1);
@@ -31,7 +37,13 @@ const fastify = Fastify();
 //Websocket
 let wss: WebSocketServer; 
 
-//Instance
+/**
+ * BusIntance
+ * 
+ * Only instantiate once, do not declare new intance of it since there is a persistent data from the subclass
+ * Subclasess (are the Bus Cooperative in my area)
+ *    Dasutransco
+ */
 const userBus = new BusInstance(defaultConfig);
 userBus.setInstance();
 
@@ -39,7 +51,15 @@ let cleanUpIntervalAges: any = null;
 
 // BOUNDARY ###########################################################################################
 
+/**
+ * Rest should be scope or prefix with /api
+ * (fastify, opt, done) 
+ * fastify = FastifyInstance
+ * opt = { prefix: "/api", userBus: userBus}. this inject to user.buildRoutes
+ *       no need to pass value in function
+ */
 fastify.register((fastify, opt, done)=>{ user.buildRoutes(fastify, opt, done)}, { prefix: "/api", userBus: userBus})
+
 
 function terminateAllClientConnection() {
    let connectedUser = 0;
@@ -108,7 +128,7 @@ function startWebSocket() {
 // CRON CONFIG
 const schedule = defaultConfig.schedule;
 
-// CLOSE CONNECTION
+// CLOSE CONNECTION at 10 pm Asia/Manila timezone
 cron.schedule(schedule.closedConnection.cron, function() {
    logging.info('Stopping WebSocket server at 10 PM.');
    terminateAllClientConnection();
@@ -131,7 +151,7 @@ cron.schedule(schedule.closedConnection.cron, function() {
    timezone: schedule.closedConnection.timezone
 });
 
-// CLOSE CONNECTION
+// OPENING CONNECTION at 5 am Asia/Manila timezone
 cron.schedule(schedule.openConnection.cron, function() {
    setTimeout(() => {
       logging.info('Booting WebSocket server at 5 AM.');

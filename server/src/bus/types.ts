@@ -1,8 +1,10 @@
 export type dasutransco = "DASUTRANSCO";
+export type minitransco = "MINITRANSCO"
+export type dipatransco = "DIPATRANSCO"
 
-export type supported = dasutransco;
+export type supported = dasutransco | minitransco | dipatransco;
 
-export type literals = { [key in supported]: any };
+export type supportedBuses = { [key in supported]: any };
 
 export type coord1 = {
    lat1: number,

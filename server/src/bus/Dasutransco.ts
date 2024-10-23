@@ -264,7 +264,11 @@ export class Dasutransco {
 
    }
 
-   getBusesBaseRoute(route: string) {
-      return this.routes[route] ? this.routes[route] : {};
+   getAvailableBus(route: string) {
+      return this.groups[route] ? this.groups[route] : {}
+   }
+
+   getSelectedBus(route: string, busId: string) {
+      return this.groups[route][busId] ? this.groups[route][busId] : {}
    }
 }

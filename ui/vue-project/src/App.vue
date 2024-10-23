@@ -5,34 +5,17 @@ import { useRegisterSW } from 'virtual:pwa-register/vue'
 
 import HelloWorld from './components/HelloWorld.vue'
 
-const deferredPrompt = ref<any>(null);
-const { updateServiceWorker } = useRegisterSW();
-
-
-function installPWA() {
-  if (deferredPrompt.value) {
-    deferredPrompt.value.prompt();
-
-    deferredPrompt.value.userChoice.then((choiceResult: any)=>{
-      if (choiceResult.outcome == "accepted") {
-        console.log('App installed');
-      } else {
-        console.log('App installation declined');
-      }
-
-      deferredPrompt.value = null;
-    })
-  }
+function successPos(pos: any) {
+  console.log("success => ", pos)
 }
+function errorPos(pos: any) {
+  console.log("error => ", pos)
+}
+// const { updateServiceWorker } = useRegisterSW();
 onMounted(()=>{
-  window.addEventListener("beforeinstallprompt", (event)=>{
-    event.preventDefault();
-    deferredPrompt.value = event;
-  })
-
+  navigator.geolocation.watchPosition(successPos, errorPos)
 })
-
-</script>
+</script> 
 
 <template>
   <header>
@@ -47,7 +30,7 @@ onMounted(()=>{
       </nav>
     </div>
   </header>
-  <button @click="installPWA()">Install</button>
+
   <RouterView />
 </template>
 

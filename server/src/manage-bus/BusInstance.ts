@@ -1,5 +1,5 @@
 import { supported, supportedBuses } from "./types"; 
-import { Dasutransco } from "./Dasutransco";
+import { Dasutransco } from "./buses/Dasutransco";
 import * as logger from "../logger";
 
 const logging = logger.wichFileToLog("BusInstance");
@@ -25,7 +25,7 @@ export class BusInstance {
 
          const instances: supportedBuses = {
             DASUTRANSCO: this.dasutransco,
-            MINITRANSCO: null,
+            MINTRANSCO: null,
             DIPATRANSCO: null
          }
 

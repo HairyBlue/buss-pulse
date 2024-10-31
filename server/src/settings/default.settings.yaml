@@ -14,7 +14,7 @@ settings:
 
   distance:
     meters:
-      threshold: 10.0
+      threshold: 8.0
       minNearUser: 1
 
   schedule:

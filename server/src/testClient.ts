@@ -118,12 +118,6 @@ function sendSocket() {
 
 }
 
-setInterval(()=>{
-   sendSocket();
-}, 3000)
-
-startSocket();
-
 setTimeout(()=>{
    let newsam = []
    for(let sam of sampleData) {
@@ -137,3 +131,43 @@ setTimeout(()=>{
    sampleData = newsam;
 
 }, 12000)
+
+
+setTimeout(()=> {
+   sampleData.push(
+      {
+         country: "PH",
+         uuid: "b8462571-abc1-4417-8ea7-cdde0b91d7ac",
+         name: "DASUTRANSCO",
+         route: "digos_hagonoy_matano_tacul", // Standardized route
+         coord: "6.684176, 125.296040",  // Nearby Poblacion Hagonoy
+         time: Date.now(), // Current time,
+         removeLaterAt: NaN
+      },
+   )
+   console.log("New User Enable there share loc")
+}, 15000)
+
+
+
+setTimeout(()=>{
+   let newsam = []
+   for(let sam of sampleData) {
+      if (sam.uuid == "b8462571-abc1-4417-8ea7-cdde0b91d7ac") {
+         
+         sam.coord = "6.7509625639078, 125.3109845996967";
+         console.log(sam)
+      }
+      newsam.push(sam)
+   }
+   sampleData = newsam;
+
+}, 20000)
+
+
+setInterval(()=>{
+   sendSocket();
+   console.log("send socket...")
+}, 3000)
+
+startSocket();

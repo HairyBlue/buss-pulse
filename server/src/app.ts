@@ -8,11 +8,11 @@ import * as cron from "node-cron";
 
 // locals
 import { configs } from "./config"
-import { BusInstance } from "./bus/BusInstance";
-import { getDistanceFromBCenter } from "./bus/util"; 
+import { BusInstance } from "./manage-bus/BusInstance";
+import { getDistanceFromBCenter } from "./manage-bus/util"; 
 import * as logger from "./logger";
 
-import * as user from "./routes/users";
+import * as user from "./fastify-routes/users";
 interface ExtendWebSocket extends WebSocket {
    lastActive?: number
 }

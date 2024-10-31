@@ -1,8 +1,8 @@
 export type dasutransco = "DASUTRANSCO";
-export type minitransco = "MINITRANSCO"
+export type mintransco = "MINTRANSCO"
 export type dipatransco = "DIPATRANSCO"
 
-export type supported = dasutransco | minitransco | dipatransco;
+export type supported = dasutransco | mintransco | dipatransco;
 
 export type supportedBuses = { [key in supported]: any };
 

@@ -2,3 +2,61 @@ UPCOMMING ????
 
 
 AMBOT UG NEXT? NUXT? OR SPA nalang
+
+Bus Pulse
+Welcome to BUS PULSE APP!
+Your Gateway to convinince ride
+
+Unsa ning Bus Pulse kuno?
+What is Bus Pulse?
+Ang Bus Pulse usa ka real time bus tracking para sa pasahero. Kini dinaka moblemag padung naba ang bus kay makadawat man kag update kung asa na dapita ug dina masayang ang uras nimo hinulat or mabayaan.
+Bus Pulse is a realtime bus tracking app for commuters. This way you can recieve instant update on bus location, optimize your journey with arrival prediction and minimize your waste time.
+
+Ang Bus Pulse kaylangan imong Kuoperasyon
+Bus Pulse needs your cooperation
+Ang Bus Pulse kay naga agad kini ug minimum duha ka pasahero na nakasakay nah ug kay langan nato ilang kooperasyon na mogamit sa Bus Pulse ug eh share ilang location gamit aning app. Katong mga shared na location mao gamit para ma update tong nag paabut/hulat.
+Bus Pulse are reliaead on minimum two passengers that are already on the ride, which it needs thier cooperation to used Bus Pulse and share there location through the app. The shared location would be used to updates those commuter who waits. 
+
+
+Why Bus Pulse need two passenger to share thier location?
+Bus Pulse are not partner with bus services/cooperative, so theres no way to tell the current update of the buss or where the bus currently or if it really the bus moving .
+To make the bus update are realiable, Bus Pulse need minimum of two users if the bus is still in transit
+
+Ngano ang pasahero may mo hago-hago ug share sa ilang location
+Why User are the One Who share there location?
+Ang Bus Pulse kay dili partner sa naga serbisyo ug mga bus, kini gibuhat para sa mananakay ug libre ra gamiton. Maong kay langan natog kuoperasyon. So maong pakisultii imong mga amigo/amiga, pamilya ug uban pah. bahin aning app nato.
+Bus Pulse are not partnered on bus services, this app was build for community and freely to use. It only work if everyone is cooperate. So tell your friends, family and etc. about our App.
+
+What is the limiation
+
+
+I am concern with my location being shared
+No worries, your location is not being shared by third party your location only used when you are on the ride. It will automatically remove if you are inactive or 
+Ayaw ka publema, imong lokasyon dili kini geh pasa sa usa ubang partido, dinhia rani magamit
+
+Ngano kini gi buhat ug libre ra?
+Why Bus Pulse is being build and freely to used?
+Waiting at station, on road or any where you wait is frustating especially if you are in hurry, I build this app to help my community on the ride, and also to be aware that this solution can be exist. 
+Its free since this is not a business, this app intended solely for commuters 
+Makasapot biya hinulat labi na gadali ka labi na naaka sa dalaan na init o niulan kalit. Maong gibuhat kuni para atleast makasay tag komportable ug makabalo mo na kini nga solution kay posible
+
+Available bah ang Bus Pulse sa akong area
+Is Buss Pulse available on my area
+Buss Pulse only avalable on Province of Davao Del Sur, Mindanao, Philippines.
+
+Unsa mga bus ang naa sa Bus Pulse
+What Buses currently Supported of Bus Pulse
+Bus Pulse currently support DASUTRANSCO. I will expand the supported buses with your help. So join now to the discord or fb page
+
+Usa mi sa naga serbisyu ug bus, pwede mi mo gamit sa Bus Pulse.
+Pwede kaayu, akong ma suggest imong mga driver ug konductor pagamita. Adona kini
+
+Open for donation.
+This will help Bus Pulse to continue to work.
+And can upgrade to more powerfull services.
+
+
+The plan used for Bus Pulse.
+
+
+Behind the Bus Pulse.

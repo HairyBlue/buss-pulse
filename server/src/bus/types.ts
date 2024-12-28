@@ -1,3 +1,4 @@
+//default.settings.yaml => allowedBus
 export type dasutransco = "DASUTRANSCO";
 export type mintransco = "MINTRANSCO"
 export type dipatransco = "DIPATRANSCO"

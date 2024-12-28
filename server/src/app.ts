@@ -8,8 +8,8 @@ import * as cron from "node-cron";
 
 // locals
 import { configs } from "./config"
-import { BusInstance } from "./manage-bus/BusInstance";
-import { getDistanceFromBCenter } from "./manage-bus/util"; 
+import { BusInstance } from "./bus/BusInstance";
+import { getDistanceFromBCenter } from "./bus/util"; 
 import * as logger from "./logger";
 
 import * as user from "./fastify-routes/users";
@@ -44,8 +44,8 @@ let wss: WebSocketServer;
  * Subclasess (are the Bus Cooperative in my area)
  *    Dasutransco
  */
-const userBus = new BusInstance(defaultConfig);
-userBus.setInstance();
+const userBus = new BusInstance();
+userBus.register(defaultConfig);
 
 let cleanUpIntervalAges: any = null;
 

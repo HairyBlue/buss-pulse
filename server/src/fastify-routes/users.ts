@@ -1,11 +1,11 @@
 import Fastify, { FastifyReply, FastifyRequest, FastifyInstance } from "fastify";
-import * as genericRoute from "../manage-bus/genericRoute";
-import { BusInstance  } from "../manage-bus/BusInstance";
+import * as genericRoute from "../bus/GenericRoute";
+import { BusInstance  } from "../bus/BusInstance";
 
 function buildRoutes(fastify: FastifyInstance, opts: any, done: any) {
    fastify.get("/bus-and-route", function(request: FastifyRequest, reply: FastifyReply) {
       reply.code(200).send({
-         data: genericRoute
+         data: genericRoute.RouteMaps
       })
    })
 

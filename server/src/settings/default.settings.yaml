@@ -26,3 +26,9 @@ settings:
       cron: "0 5 * * *" # "0 5 * * *" 5AM
       timezone: "Asia/Manila"
       enable: true
+  
+  allowedBus: [
+    "DASUTRANSCO",
+    "MINTRANSCO",
+    "DIPATRANSCO"
+  ]

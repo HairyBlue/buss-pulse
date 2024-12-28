@@ -73,7 +73,52 @@ let sampleData: UserBus[] = [
       coord: "7.618812290065919, 124.57387068381021",  // Coordinates within Poblacion Hagonoy
       time: Date.now(), // Current time,
       removeLaterAt: NaN
-   }
+   },
+   {
+      country: "PH",
+      uuid: "cd6d6e5d-4a22-43a0-bd48-78f9ab710fa7",
+      name: "DASUTRANSCO",
+      route: "digos_hagonoy_matano_tacul", // Standardized route
+      coord: "6.684179, 125.295993",  // Coordinates within Poblacion Hagonoy
+      time: Date.now(), // Current time,
+      removeLaterAt: NaN
+   },
+   {
+      country: "PH",
+      uuid: "cd6d6e5d-4a22-43a0-cd12-78f9ab710fa7",
+      name: "MINTRANSCO",
+      route: "digos_hagonoy_matano_tacul", // Standardized route
+      coord: "6.925434239812144, 125.06962871573384",  // Coordinates within Poblacion Hagonoy
+      time: Date.now(), // Current time,
+      removeLaterAt: NaN
+   },
+   {
+      country: "PH",
+      uuid: "c36d6c5d-4a22-43a0-cd12-78f9ab710fa7",
+      name: "MINTRANSCO",
+      route: "digos_hagonoy_matano_tacul", // Standardized route
+      coord: "7.618812290065919, 124.57387068381021",  // Coordinates within Poblacion Hagonoy
+      time: Date.now(), // Current time,
+      removeLaterAt: NaN
+   },
+   {
+      country: "PH",
+      uuid: "cd6d6e5d-4a22-43a0-bd48-78f9ab710fa7",
+      name: "MINTRANSCO",
+      route: "digos_hagonoy_matano_tacul", // Standardized route
+      coord: "6.684179, 125.295993",  // Coordinates within Poblacion Hagonoy
+      time: Date.now(), // Current time,
+      removeLaterAt: NaN
+   },
+   {
+      country: "PH",
+      uuid: "b8462571-abc1-4417-8ea7-cdde0b91d7ab",
+      name: "MINTRANSCO",
+      route: "digos_hagonoy_matano_tacul", // Standardized route
+      coord: "6.684176, 125.296036",  // Nearby Poblacion Hagonoy
+      time: Date.now(), // Current time,
+      removeLaterAt: NaN
+   },
 ];
 
 function haddleReconnect() {

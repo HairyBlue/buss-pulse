@@ -1,16 +1,9 @@
-import { UserBus, coord } from "../../types";
-import { dasutransco } from "../types"; 
-import { getDistanceMeters, busId } from "../util"; 
+import { UserBus, coord } from "../types";
+import { getDistanceMeters, busId } from "./util"; 
 
-import * as logger from "../../logger";
+import * as logger from "../logger";
 
-const logging = logger.wichFileToLog("Dasutransco");
-const mybuss = "DASUTRANSCO";
-
-export const standardizeRoute: { [key: string]: string} = {
-   "tacul_matanao_hagonoy_digos": "Tacul Magsaysay via Hagonoy & Matanao - Digos City",
-   "digos_hagonoy_matano_tacul": "Digos City - Tacul Magsaysay via Hagonoy & Matanao"
-}
+const logging = logger.wichFileToLog("BaseBus");
 
 type user = {
       name: string,
@@ -27,19 +20,23 @@ type group = { [key: string]: busReg }
 
 // How did the past me did this
 // Help me past me to understand this
-export class Dasutransco {
-   config: any = null;
+export class BaseBus {
+   private name: string = "NOT_ALLOWED";
+   private sroute: {[key: string]: any} = {}
+   private config: any = null;
 
-   routes: route = {};
-   groups: group = {};
-   ageRoute: {[key: string]: number} = {}
+   private routes: route = {};
+   private groups: group = {};
+   private ageRoute: {[key: string]: number} = {}
 
-   setConfig(config: any) {
+   setConfig(name: string, standardizeRoute: any, config: any) {
+      this.name = name;
+      this.sroute = standardizeRoute;
       this.config = config
    }
 
    standardizeRoute(sroute: string): boolean {
-      if (standardizeRoute[sroute]) return true
+      if (this.sroute[sroute]) return true
       return false
    }
 
@@ -48,18 +45,18 @@ export class Dasutransco {
 
       const coord = /([-]?\d+\.\d+), *([-]?\d+\.\d+)/.exec(msg.coord);
 
-      if (msg.name !== ("DASUTRANSCO" as dasutransco)) {
+      if (msg.name !== this.name) {
          logging.warn("Unable to register user, not match name", msg.name);
          return
       }
 
       if (!coord) {
-         logging.warn("Unable to register user, not match coord", msg.coord);
+         logging.warn("Unable to register user, not match coord", msg.name, msg.coord);
          return
       }
 
-      if (! standardizeRoute[msg.route]) {
-         logging.warn("Unable to register user, not match standardizeRoute", msg.route);
+      if (!this.sroute[msg.route]) {
+         logging.warn("Unable to register user, not match standardize route", msg.name, msg.route);
          return
       }
 
@@ -296,7 +293,7 @@ export class Dasutransco {
             
             
             if (nearUsers.length >= minTrack) {
-               const bId = busId(mybuss);
+               const bId = busId(this.name);
 
                if (!this.groups[msg.route][bId]) {
                   this.groups[msg.route][bId] = {}
